@@ -1,4 +1,6 @@
 console.log('hello detail')
+const postBox = document.getElementById('post-box')
+
 const backBtn = document.getElementById('back-btn')
 const updateBtn = document.getElementById('update-btn')
 const deleteBtn = document.getElementById('delete-btn')
@@ -22,6 +24,19 @@ $.ajax({
             updateBtn.classList.remove('not-visible')
             deleteBtn.classList.remove('not-visible')
         }
+
+        const titleElement = document.createElement('h3')
+        titleElement.setAttribute('class', 'mt-3')
+        
+        const bodyElement = document.createElement('p')
+        bodyElement.setAttribute('class', 'mt-1')
+
+        titleElement.textContent = data.title
+        bodyElement.textContent = data.body
+
+        postBox.appendChild(titleElement)
+        postBox.appendChild(bodyElement)
+        
         spinnerBox.classList.add('not-visible')
     },
     error: function(error) {
