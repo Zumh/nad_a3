@@ -9,5 +9,5 @@ def post_save_create_profile(sender, instance, created, *args, **kwargs):
     print(instance)
     print(created)
     if created:
-        Profile.objects.cerate(user=instance)
+        Profile.objects.create(user=instance)
         
