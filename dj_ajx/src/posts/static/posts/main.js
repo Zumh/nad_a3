@@ -1,4 +1,4 @@
-console.log('hello World')
+
 
 const postsBox = document.getElementById('posts-box')
 const spinnerBox = document.getElementById('spinner-box')
