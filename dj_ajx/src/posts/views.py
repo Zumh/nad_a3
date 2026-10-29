@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Post
+from .models import Post, Photo
 from django.http import JsonResponse, HttpResponse
 from .forms import PostForm
 from profiles.models import Profile
@@ -106,4 +106,4 @@ def image_upload_view(request):
         new_post_id = request.POST.get('new_post_id')
         post = Post.objects.get(id=new_post_id)
         Photo.objects.create(image=img, post=post)
-    return HttpResponse()
+        return HttpResponse()
