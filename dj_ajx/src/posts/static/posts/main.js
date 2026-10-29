@@ -11,7 +11,6 @@ const body = document.getElementById('id_body')
 const csrf = document.getElementsByName('csrfmiddlewaretoken')
 const alertBox = document.getElementById('alert-box')
 const url = window.location.href
-console.log('csrf', csrf[0].value)
 
 const getCookie = (name) => {
     let cookieValue = null;
@@ -30,6 +29,13 @@ const getCookie = (name) => {
 }
 
 const csrftoken = getCookie('csrftoken');
+
+const deleted = localStorage.getItem('title')
+
+if(deleted){
+    handleAlerts('danger', `deleted "${deleted}"`)
+    localStorage.clear()
+} 
 const likedUnlikePosts = () => {
     const likeUnlikeForms = [...document.getElementsByClassName('like-unlike-forms')]
     likeUnlikeForms.forEach(form => form.addEventListener('submit', e => {
@@ -90,7 +96,7 @@ const getData = () => {
                 likedUnlikePosts()
             }, 100);
         
-            console.log(response.size)
+  
             if(response.size === 0){
                 endBox.textContent = 'No posts added yet...'
             } 
