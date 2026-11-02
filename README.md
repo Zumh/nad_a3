@@ -16,3 +16,5 @@ ALLOWED_HOSTS = [
 
 ## Testing
 - user name: lian and password: helloWorld@123
+- client computer can access:
+    -   http://ipaddresshere:8000
