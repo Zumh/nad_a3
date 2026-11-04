@@ -41,6 +41,15 @@ CSRF_TRUSTED_ORIGINS = [
     'https://zlungler5069-nad-a3.onrender.com',
 ]
 
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
 # Application definition
 
 INSTALLED_APPS = [
