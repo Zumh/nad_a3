@@ -26,13 +26,20 @@ SECRET_KEY = 'django-insecure-p)8%!!ns*a47s3z#6z-tq5uwdk^si3miy-^4n=a5=59xekft&@
 DEBUG = False
 
 #ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = [
+#     'localhost',
+#     '127.0.0.1',
+#     '192.168.0.161', # add laptop address here
+#     'https://zlungler5069-nad-a3.onrender.com/'
+# ]
+
 ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    '192.168.0.161', # add laptop address here
-    'https://zlungler5069-nad-a3.onrender.com/'
+    'zlungler5069-nad-a3.onrender.com',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://zlungler5069-nad-a3.onrender.com',
+]
 
 # Application definition
 
