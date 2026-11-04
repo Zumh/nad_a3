@@ -49,8 +49,8 @@ STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
         "OPTIONS": {
-            "access_key": os.environ.get("SUPA_ACCESS_KEY_ID"),
-            "secret_key": os.environ.get("SUPA_SECRET_ACCESS_KEY"),
+            "access_key": os.environ.get("SUPA_S3_ACCESS_KEY_ID"),
+            "secret_key": os.environ.get("SUPA_S3_SECRET_ACCESS_KEY"),
             "bucket_name": os.environ.get("SUPA_STORAGE_BUCKET_NAME"),
             "endpoint_url": os.environ.get("SUPA_S3_ENDPOINT_URL"),
             "region_name": os.environ.get("SUPA_S3_REGION_NAME"),
