@@ -28,8 +28,6 @@ SECRET_KEY = 'django-insecure-p)8%!!ns*a47s3z#6z-tq5uwdk^si3miy-^4n=a5=59xekft&@
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
     'zlungler5069-nad-a3.onrender.com',
 ]
 
