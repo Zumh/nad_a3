@@ -21,8 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p)8%!!ns*a47s3z#6z-tq5uwdk^si3miy-^4n=a5=59xekft&@'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
@@ -44,19 +43,20 @@ CSRF_TRUSTED_ORIGINS = [
 #     },
 # }
 
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
         "OPTIONS": {
-            "access_key": os.environ.get("AWS_ACCESS_KEY_ID"),
-            "secret_key": os.environ.get("AWS_SECRET_ACCESS_KEY"),
-            "bucket_name": os.environ.get("AWS_STORAGE_BUCKET_NAME"),
-            "endpoint_url": os.environ.get("AWS_S3_ENDPOINT_URL"),
-            "region_name": os.environ.get("AWS_S3_REGION_NAME"),
+            "access_key": os.environ.get("SUPA_ACCESS_KEY_ID"),
+            "secret_key": os.environ.get("SUPA_SECRET_ACCESS_KEY"),
+            "bucket_name": os.environ.get("SUPA_STORAGE_BUCKET_NAME"),
+            "endpoint_url": os.environ.get("SUPA_S3_ENDPOINT_URL"),
+            "region_name": os.environ.get("SUPA_S3_REGION_NAME"),
             "addressing_style": "path",
             "signature_version": "s3v4",
-            "custom_domain": os.environ.get("AWS_S3_CUSTOM_DOMAIN"),
+            "custom_domain": os.environ.get("SUPA_S3_CUSTOM_DOMAIN"),
         },
     },
     "staticfiles": {
