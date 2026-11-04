@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,17 +25,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-p)8%!!ns*a47s3z#6z-tq5uwdk^si3miy-^4n=a5=59xekft&@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-#ALLOWED_HOSTS = ['*']
-# ALLOWED_HOSTS = [
-#     'localhost',
-#     '127.0.0.1',
-#     '192.168.0.161', # add laptop address here
-#     'https://zlungler5069-nad-a3.onrender.com/'
-# ]
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
     'zlungler5069-nad-a3.onrender.com',
 ]
 
@@ -103,12 +99,27 @@ WSGI_APPLICATION = 'posts_proj.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
+# DATABASES = {
+#     'default': dj_database_url.parse(
+#         os.environ.get('DATABASE_URL')
+#     )
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"
+    )
 }
+
+
 
 
 # Password validation
@@ -145,18 +156,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
+
+# Development
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
     BASE_DIR / 'posts' / 'static',
     BASE_DIR / 'profiles' / 'static',
 ]
-
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+
+# Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
 
 
 
@@ -169,8 +185,10 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 LOGIN_URL = '/admin/'
 
-MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-    },
-}
+# MAILERS = {
+#     'default': {
+#         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
+#     },
+# }
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
