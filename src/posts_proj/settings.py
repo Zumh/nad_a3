@@ -13,7 +13,9 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 from pathlib import Path
 import dj_database_url
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,6 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
+      '127.0.0.1',
     'zlungler5069-nad-a3.onrender.com',
 ]
 
@@ -43,8 +46,9 @@ CSRF_TRUSTED_ORIGINS = [
 #     },
 # }
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
 
+
+SECRET_KEY = os.environ.get('SECRET_KEY')
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
@@ -121,7 +125,7 @@ WSGI_APPLICATION = 'posts_proj.wsgi.application'
 
 # Database
 
-#DATABASE_URL = os.environ.get("DATABASE_URL")
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 # DATABASES = {
 #     'default': dj_database_url.config(
