@@ -14,7 +14,10 @@ const url = window.location.href
 const dropzone = document.getElementById('my-dropzone')
 const addBtn = document.getElementById('add-btn')
 const closeBtns = [...document.getElementsByClassName('add-modal-close')]
+const sortBtn = document.getElementById('sort-btn')
+let newestFirst = true
 console.log(url)
+
 const getCookie = (name) => {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -65,50 +68,56 @@ const likedUnlikePosts = () => {
 }
 let visible = 3
 const getData = () => {
-        $.ajax({
+    $.ajax({
         type: 'GET',
-        url: `/data/${visible}/`,
-        success: function(response){
+        url: `/data/${visible}/?order=${newestFirst ? 'newest' : 'oldest'}`,
+        success: function(response) {
             console.log(response)
+
             const data = response.data
+
             setTimeout(() => {
                 spinnerBox.classList.add('not-visible')
-                console.log(data)
+
                 data.forEach(element => {
-                postsBox.innerHTML += `
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <h5 class="card-title">${element.title}</h5>
-                        <p class="card-text">${element.body}</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-2">
-                                <a href="${url}${element.id}" class="btn btn-primary">Details</a>
-                            </div>
-                            <div class="col-2">
-                                <form class="like-unlike-forms" data-form-id="${element.id}">
-                                <button class="btn btn-primary" id="like-unlike-${element.id}">${element.liked ? `Unlike (${element.count})`:`Like (${element.count})`}</button>
-                                </form>
+                    postsBox.innerHTML += `
+                    <div class="card mb-2">
+                        <div class="card-body">
+                            <h5 class="card-title">${element.title}</h5>
+                            <p class="card-text">${element.body}</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-2">
+                                    <a href="${url}${element.id}" class="btn btn-primary">Details</a>
+                                </div>
+                                <div class="col-2">
+                                    <form class="like-unlike-forms" data-form-id="${element.id}">
+                                        <button class="btn btn-primary" id="like-unlike-${element.id}">
+                                            ${element.liked ? `Unlike (${element.count})` : `Like (${element.count})`}
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                `
-                });
+                    `
+                })
+
                 likedUnlikePosts()
-            }, 100);
-        
-  
-            if(response.size === 0){
+
+            }, 100)
+
+            if (response.size === 0) {
+                loadBtn.classList.add('not-visible')
                 endBox.textContent = 'No posts added yet...'
-            } 
+            }
             else if (response.size <= visible) {
                 loadBtn.classList.add('not-visible')
                 endBox.textContent = 'No more posts to load...'
             }
         },
-        error: function( error ){
+        error: function(error) {
             console.log('error', error)
         }
     })
@@ -120,6 +129,32 @@ loadBtn.addEventListener('click', ()=>{
 
     getData()
 
+})
+
+sortBtn.addEventListener('click', () => {
+
+    // Switch sorting direction
+    newestFirst = !newestFirst
+
+    // Update button text
+    sortBtn.textContent = newestFirst ? 'Oldest first' : 'Newest first'
+
+    // Clear existing posts
+    postsBox.innerHTML = ''
+
+    // Reset pagination
+    visible = 3
+
+    // Restore Load more button if it was hidden
+    endBox.innerHTML = ''
+    endBox.appendChild(loadBtn)
+    loadBtn.classList.remove('not-visible')
+
+    // Show spinner
+    spinnerBox.classList.remove('not-visible')
+
+    // Fetch posts again
+    getData()
 })
 let newPostId = null
 postForm.addEventListener('submit', e=>{

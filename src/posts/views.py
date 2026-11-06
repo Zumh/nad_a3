@@ -40,26 +40,38 @@ def post_detail(request, pk):
     return render(request, 'posts/detail.html', context)
 @login_required
 def load_post_data_view(request, num_posts):
-    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-        visible = 3
-        upper = num_posts
-        lower = upper - visible
-        size = Post.objects.all().count()
 
-        qs = Post.objects.all()
-        
-        data = []
-        for obj in qs:
-            item = {
-                'id': obj.id,
-                'title': obj.title,
-                'body': obj.body,
-                'liked': True if request.user in obj.liked.all() else False,
-                'count': obj.like_count,
-                'author': obj.author.user.username
-            }
-            data.append(item)
-        return JsonResponse({'data':data[lower:upper], 'size': size})
+    visible = 3
+
+    order = request.GET.get('order', 'newest')
+
+    if order == 'oldest':
+        qs = Post.objects.all().order_by('created')
+    else:
+        qs = Post.objects.all().order_by('-created')
+
+    size = qs.count()
+
+    lower = num_posts - visible
+    upper = num_posts
+
+    data = []
+
+    for obj in qs[lower:upper]:
+        data.append({
+            'id': obj.id,
+            'title': obj.title,
+            'body': obj.body,
+            'liked': request.user in obj.liked.all(),
+            'count': obj.like_count,
+            'author': obj.author.user.username,
+        })
+
+    return JsonResponse({
+        'data': data,
+        'size': size,
+    })
+
 @login_required
 def post_detail_data_view(request, pk):
     obj = Post.objects.get(pk=pk)

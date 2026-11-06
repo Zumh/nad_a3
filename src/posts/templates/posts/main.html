@@ -41,9 +41,16 @@ posts
     </div>
     <div id="alert-box"></div>
    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-info mb-2" data-bs-toggle="modal" data-bs-target="#addPostModal">
-        add post
-    </button>
+    <div class="mb-2">
+        <button type="button" class="btn btn-info"
+            data-bs-toggle="modal" data-bs-target="#addPostModal">
+            add post
+        </button>
+
+        <button type="button" class="btn btn-secondary" id="sort-btn">
+            Oldest first
+        </button>
+    </div>
     <div id="posts-box" ></div>
     <div id="spinner-box" class="text-center">
         <div class="spinner-border" role="status"></div>
