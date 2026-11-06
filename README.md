@@ -18,4 +18,5 @@ ALLOWED_HOSTS = [
 
 - user name: lian and password: helloWorld@123
 - client computer can access:
-    -   http://ipaddresshere:8000
+
+    -   https://zlungler5069-nad-a3.onrender.com/
