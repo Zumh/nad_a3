@@ -17,4 +17,4 @@ ALLOWED_HOSTS = [
 ## Testing
 - user name: lian and password: helloWorld@123
 - client computer can access:
-    -   
+    -   https://zlungler5069-nad-a3.onrender.com/
