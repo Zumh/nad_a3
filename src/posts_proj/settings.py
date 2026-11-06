@@ -35,6 +35,7 @@ ALLOWED_HOSTS = [
 
 CSRF_TRUSTED_ORIGINS = [
     'https://zlungler5069-nad-a3.onrender.com',
+    
 ]
 
 # STORAGES = {
