@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from profiles.models import Profile
+
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 # Create your models here.
 
 
@@ -32,4 +35,8 @@ class Photo(models.Model):
     def __str__(self):
         return f"{self.post.title}-{self.pk}"
 
+@receiver(post_delete, sender=Photo)
+def delete_photo_file(sender, instance, **kwargs):
+    if instance.image:
+        instance.image.delete(save=False)
     
