@@ -9,7 +9,8 @@ services:
     plan: free
     name: posts_proj
     runtime: python
-    buildCommand: './build.sh'
+    rootDir: src
+    buildCommand: 'bash ../build.sh'
     startCommand: 'python -m gunicorn posts_proj.asgi:application -k uvicorn.workers.UvicornWorker'
     envVars:
       - key: DATABASE_URL
