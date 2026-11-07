@@ -31,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 
-ALLOWED_HOSTS =zlungler5069-nad-a3.onrender.com
+ALLOWED_HOSTS ='zlungler5069-nad-a3.onrender.com'
 
 CSRF_TRUSTED_ORIGINS = [
     'https://zlungler5069-nad-a3.onrender.com',
