@@ -25,15 +25,7 @@ from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    # path(
-    #     'favicon.ico',
-    #     serve,
-    #     {
-    #         'path': 'favicon.ico',
-    #         'document_root': settings.BASE_DIR / 'static'
-    #     }
-    # ),
+    path('favicon.ico', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
 
     path('', include('posts.urls', namespace='posts')),
     path('profiles/', include('profiles.urls', namespace='profiles')),
