@@ -31,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
-    # '127.0.0.1',
+     '127.0.0.1',
     # 'localhost',
     'zlungler5069-nad-a3.onrender.com',
 ]
