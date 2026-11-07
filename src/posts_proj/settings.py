@@ -14,8 +14,14 @@ from pathlib import Path
 import dj_database_url
 import os
 from dotenv import load_dotenv
+# import sentry_sdk
+
 
 load_dotenv()
+# sentry_sdk.init(
+#     dsn="YOUR_SENTRY_DSN",
+#     send_default_pii=True,
+# )
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -39,14 +45,13 @@ CSRF_TRUSTED_ORIGINS = [
     
 ]
 
-# STORAGES = {
-#     "default": {
-#         "BACKEND": "django.core.files.storage.FileSystemStorage",
-#     },
-#     "staticfiles": {
-#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-#     },
-# }
+
+STATIC_URL = '/static/'
+
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 
@@ -66,8 +71,8 @@ STORAGES = {
         },
     },
     "staticfiles": {
-        #"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        #"BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
 
@@ -90,7 +95,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    #'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -184,7 +189,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
-STATIC_URL = '/static/'
+
 
 
 # Development
@@ -193,7 +198,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'posts' / 'static',
     BASE_DIR / 'profiles' / 'static',
 ]
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 
 # Media files
