@@ -14,14 +14,10 @@ from pathlib import Path
 import dj_database_url
 import os
 from dotenv import load_dotenv
-# import sentry_sdk
 
 
 load_dotenv()
-# sentry_sdk.init(
-#     dsn="YOUR_SENTRY_DSN",
-#     send_default_pii=True,
-# )
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -35,10 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 
-ALLOWED_HOSTS = [
-      '127.0.0.1',
-    'zlungler5069-nad-a3.onrender.com',
-]
+ALLOWED_HOSTS = 'zlungler5069-nad-a3.onrender.com'
 
 CSRF_TRUSTED_ORIGINS = [
     'https://zlungler5069-nad-a3.onrender.com',
