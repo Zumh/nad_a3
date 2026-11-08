@@ -15,7 +15,9 @@ import dj_database_url
 import os
 from dotenv import load_dotenv
 
+
 load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,11 +27,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+# SECURITY WARNING: don't run with  turned on in production!
+DEBUG =os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
-      '127.0.0.1',
+     '127.0.0.1',
+    # 'localhost',
     'zlungler5069-nad-a3.onrender.com',
 ]
 
@@ -38,14 +41,19 @@ CSRF_TRUSTED_ORIGINS = [
     
 ]
 
-# STORAGES = {
-#     "default": {
-#         "BACKEND": "django.core.files.storage.FileSystemStorage",
-#     },
-#     "staticfiles": {
-#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-#     },
-# }
+
+STATIC_URL = '/static/'
+
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+    # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    # SECURE_SSL_REDIRECT = True
+    # SECURE_HSTS_SECONDS = 31536000
+    # SESSION_COOKIE_SECURE = True
+    # CSRF_COOKIE_SECURE = True
 
 
 
@@ -66,6 +74,7 @@ STORAGES = {
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+       # "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
 
@@ -182,7 +191,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
-STATIC_URL = '/static/'
+
 
 
 # Development
@@ -191,7 +200,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'posts' / 'static',
     BASE_DIR / 'profiles' / 'static',
 ]
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 
 # Media files
@@ -211,10 +220,21 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 LOGIN_URL = '/admin/'
 
-# MAILERS = {
-#     'default': {
-#         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-#     },
-# }
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+}
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
