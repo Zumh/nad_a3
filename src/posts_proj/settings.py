@@ -221,5 +221,20 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 LOGIN_URL = '/admin/'
 
 
-
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+}
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
