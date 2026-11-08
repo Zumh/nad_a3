@@ -1,4 +1,3 @@
-console.log('hello detail')
 const postBox = document.getElementById('post-box')
 const alertBox = document.getElementById('alert-box')
 
@@ -24,12 +23,10 @@ $.ajax({
     type: 'GET',
     url: url,
     success: function(response){
-        console.log(response)
         const data = response.data
         if(data.logged_in !== data.author){
             console.log('different')
         } else {
-            console.log('the same')
             updateBtn.classList.remove('not-visible')
             deleteBtn.classList.remove('not-visible')
         }

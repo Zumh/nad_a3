@@ -16,7 +16,6 @@ const addBtn = document.getElementById('add-btn')
 const closeBtns = [...document.getElementsByClassName('add-modal-close')]
 const sortBtn = document.getElementById('sort-btn')
 let newestFirst = true
-console.log(url)
 
 const getCookie = (name) => {
     let cookieValue = null;
@@ -57,7 +56,6 @@ const likedUnlikePosts = () => {
                 'pk': clickedId,
             },
             success: function(response){
-                console.log(response)
                 clickedBtn.textContent = response.liked ? `Unlike (${response.count})` : `Like (${response.count})`
             },
             error: function(error){
@@ -72,7 +70,6 @@ const getData = () => {
         type: 'GET',
         url: `/data/${visible}/?order=${newestFirst ? 'newest' : 'oldest'}`,
         success: function(response) {
-            console.log(response)
 
             const data = response.data
 
@@ -170,7 +167,6 @@ postForm.addEventListener('submit', e=>{
 
         },
         success: function(response) {
-            console.log(response)
             newPostId = response.id
             postsBox.insertAdjacentHTML('afterbegin', `
                 <div class="card mb-2">
