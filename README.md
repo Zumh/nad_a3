@@ -7,6 +7,23 @@ NAD Network Application security
 - client computer can access:
 
     -   https://zlungler5069-nad-a3.onrender.com/
+## Setup
+Django Setup and Run Commands
+
+Step 1 - Create a superuser
+python src/manage.py createsuperuser
+
+Step 2 - Create database migrations
+python src/manage.py makemigrations
+
+Step 3 - Apply migrations to the database
+python src/manage.py migrate
+
+Step 4 - Collect static files
+python src/manage.py collectstatic
+
+Step 5 - Run the development server
+python src/manage.py runserver
     
 ## How to run between different machine
 - Add ip here
