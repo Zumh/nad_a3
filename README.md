@@ -82,3 +82,7 @@ DATABASE_URL=<<connection string for database>>
 - Storage > Create database > folder name
 - Connect > Direct > Transfer pooler
 - set that storage to public for now
+
+## Load local database to supabase (after .env with database url is setup) Inside terminal
+- python manage.py dumpdata > data.json
+- python manage.py dumpdata posts profiles > data.json
