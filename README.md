@@ -1,6 +1,13 @@
 # nad_a3
 NAD Network Application security
 
+## Testing
+
+- user name: lian and password: helloWorld@123
+- client computer can access:
+
+    -   https://zlungler5069-nad-a3.onrender.com/
+    
 ## How to run between different machine
 - Add ip here
 ```
@@ -58,9 +65,3 @@ DATABASE_URL=<<connection string for database>>
 - Storage > Create database > folder name
 - Connect > Direct > Transfer pooler
 - set that storage to public for now
-## Testing
-
-- user name: lian and password: helloWorld@123
-- client computer can access:
-
-    -   https://zlungler5069-nad-a3.onrender.com/
